@@ -86,7 +86,7 @@ public class LoginProcess {
         driver.findElement(By.xpath("//*[@type='text']")).sendKeys("ahmed");
         driver.findElement(By.xpath("//*[@type='password']")).sendKeys("Password!");
         driver.findElement(By.xpath("//*[@class='radius']")).click();
-        String expectedresult="Your username is invalid!";
+        String expectedresult="     Your username is invalid!";
         String actualresult=driver.findElement(By.id("flash")).getText();
         assertTrue(actualresult.contains(expectedresult));
         driver.quit();
