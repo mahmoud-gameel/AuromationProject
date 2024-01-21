@@ -20,10 +20,29 @@ public class LoginProcess {
         driver.findElement(By.xpath("//*[@type='text']")).sendKeys("tomsmith");
         driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
         driver.findElement(By.xpath("//*[@class='radius']")).click();
-        driver.findElement(By.xpath("//*[@class='button secondary radius']")).click();
+        String expectedresult="You logged into a secure area!";
+        String actualresult=driver.findElement(By.id("flash")).getText();
+        assertTrue(actualresult.contains(expectedresult));
         driver.quit();
 
     }
+    @Test
+    public void verifyloginandlogout(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/");
+        driver.manage().window().maximize();
+        driver.findElement(By.xpath("//*[contains(text(),'Form Authentication')]")).click();
+        driver.findElement(By.xpath("//*[@type='text']")).sendKeys("tomsmith");
+        driver.findElement(By.xpath("//*[@type='password']")).sendKeys("SuperSecretPassword!");
+        driver.findElement(By.xpath("//*[@class='radius']")).click();
+        driver.findElement(By.xpath("//*[@class='button secondary radius']")).click();
+        String expectedresult="You logged out of the secure area!";
+        String actualresult=driver.findElement(By.id("flash")).getText();
+        assertTrue(actualresult.contains(expectedresult));
+        driver.quit();
+
+    }
+
 
     @Test
     public void invaildusername(){
